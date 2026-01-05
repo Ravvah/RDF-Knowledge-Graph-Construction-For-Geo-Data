@@ -1,0 +1,7 @@
+PREFIX ont: <http://example.org/ontology/>
+
+SELECT ?x
+WHERE {
+  ?x a ont:Location .
+}
+LIMIT 30

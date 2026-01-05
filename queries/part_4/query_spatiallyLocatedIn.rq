@@ -1,0 +1,7 @@
+PREFIX ont: <http://example.org/ontology/>
+
+SELECT ?s ?o
+WHERE {
+  ?s ont:spatiallyLocatedIn ?o .
+}
+LIMIT 5

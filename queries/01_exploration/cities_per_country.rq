@@ -1,0 +1,10 @@
+PREFIX schema: <http://example.org/schema/>
+
+SELECT ?country (COUNT(?city) AS ?nbCities)
+WHERE {
+  ?city a schema:City ;
+        schema:locatedIn ?country .
+}
+GROUP BY ?country
+ORDER BY DESC(?nbCities)
+LIMIT 10

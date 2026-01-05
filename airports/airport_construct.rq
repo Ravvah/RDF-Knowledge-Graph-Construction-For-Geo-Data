@@ -1,0 +1,59 @@
+PREFIX ex:   <http://example.org/schema/>
+PREFIX res:  <http://example.org/resource/>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX geo:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?airportIRI rdf:type ex:Airport .
+  ?airportIRI ex:airportName ?name .
+  ?airportIRI ex:airportType ?type .
+  ?airportIRI ex:iataCode ?iata_code .
+  ?airportIRI ex:icaoCode ?icao_code .
+  ?airportIRI geo:lat ?lat .
+  ?airportIRI geo:long ?long .
+  ?airportIRI ex:locatedIn ?cityIRI .
+}
+WHERE {
+  #################################################################
+  # URI AÉROPORT — basée sur ident (stable, ASCII, unique)
+  #################################################################
+  BIND(
+    IRI(CONCAT("http://example.org/resource/airport_", ?ident))
+    AS ?airportIRI
+  )
+
+  #################################################################
+  # NETTOYAGE DU NOM DE LA VILLE (municipality)
+  # - minuscules
+  # - suppression accents / caractères spéciaux
+  # - espaces → _
+  #################################################################
+  BIND(
+    REPLACE(
+      REPLACE(
+        REPLACE(
+          REPLACE(
+            LCASE(?municipality),
+            "[^a-z0-9 ]", ""
+          ),
+          " +", "_"
+        ),
+        "^_", ""
+      ),
+      "_$", ""
+    )
+    AS ?citySafe
+  )
+
+  BIND(
+    IRI(CONCAT("http://example.org/resource/city_", ?citySafe))
+    AS ?cityIRI
+  )
+
+  #################################################################
+  # TYPAGE DES COORDONNÉES
+  #################################################################
+  BIND(xsd:decimal(?latitude_deg)  AS ?lat)
+  BIND(xsd:decimal(?longitude_deg) AS ?long)
+}

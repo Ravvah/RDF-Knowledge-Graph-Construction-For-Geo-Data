@@ -1,0 +1,10 @@
+PREFIX schema: <http://example.org/schema/>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+
+SELECT ?city ?dbpediaCountry
+WHERE {
+  ?city a schema:City ;
+        schema:locatedIn ?localCountry .
+  ?localCountry owl:sameAs ?dbpediaCountry .
+}
+LIMIT 20

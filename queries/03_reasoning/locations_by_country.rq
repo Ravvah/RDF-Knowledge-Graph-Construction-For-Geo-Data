@@ -1,0 +1,12 @@
+PREFIX ont:    <http://example.org/ontology/>
+PREFIX schema: <http://example.org/schema/>
+
+SELECT ?country (COUNT(?loc) AS ?nbLocations)
+WHERE {
+  ?loc a ont:Location ;
+       schema:locatedIn ?country .
+}
+GROUP BY ?country
+ORDER BY DESC(?nbLocations)
+LIMIT 10
+

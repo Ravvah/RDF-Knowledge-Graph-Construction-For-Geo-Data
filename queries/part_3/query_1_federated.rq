@@ -1,0 +1,19 @@
+PREFIX schema: <http://example.org/schema/>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX dbo:    <http://dbpedia.org/ontology/>
+
+SELECT ?city ?dbpediaCountry ?abstract
+WHERE {
+  ?city a schema:City ;
+        schema:locatedIn ?localCountry .
+
+  ?localCountry owl:sameAs ?dbpediaCountry .
+
+  FILTER(STRSTARTS(STR(?dbpediaCountry), "http://dbpedia.org/resource/"))
+
+  SERVICE <http://dbpedia.org/sparql> {
+    ?dbpediaCountry dbo:abstract ?abstract .
+    FILTER (lang(?abstract) = "en")
+  }
+}
+LIMIT 10

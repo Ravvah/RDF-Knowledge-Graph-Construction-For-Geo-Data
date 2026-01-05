@@ -1,0 +1,35 @@
+PREFIX ex:   <http://example.org/schema/>
+PREFIX res:  <http://example.org/resource/>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX geo:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?cityIRI rdf:type ex:City .
+  ?cityIRI ex:population ?populationInt .
+  ?cityIRI ex:iso2 ?iso2 .
+  ?cityIRI ex:iso3 ?iso3 .
+  ?cityIRI ex:capital ?capital .
+  ?cityIRI geo:lat ?latDec .
+  ?cityIRI geo:long ?lngDec .
+  ?cityIRI ex:locatedIn ?countryIRI .
+}
+WHERE {
+  # URI ville
+  BIND(
+    IRI(CONCAT("http://example.org/resource/", REPLACE(?city, " ", "_")))
+    AS ?cityIRI
+  )
+
+  # URI pays
+  BIND(
+    IRI(CONCAT("http://example.org/resource/", REPLACE(?country, " ", "_")))
+    AS ?countryIRI
+  )
+
+  # Typage des valeurs numériques
+  BIND(xsd:integer(?population) AS ?populationInt)
+  BIND(xsd:decimal(?lat) AS ?latDec)
+  BIND(xsd:decimal(?lng) AS ?lngDec)
+}
+

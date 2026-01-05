@@ -1,0 +1,11 @@
+PREFIX ex:  <http://example.org/schema/>
+
+CONSTRUCT {
+  ?country
+      ex:researchRating ?Research_Rating ;
+      ex:inflationRating ?Inflation_Rating ;
+      ex:continentCode ?Continent .
+}
+WHERE {
+  BIND(IRI(?Country) AS ?country)
+}

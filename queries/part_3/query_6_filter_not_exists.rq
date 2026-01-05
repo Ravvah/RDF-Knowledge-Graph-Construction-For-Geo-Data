@@ -1,0 +1,13 @@
+PREFIX ex:  <http://example.org/schema/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT ?airport
+WHERE {
+  ?airport a ex:Airport .
+
+  FILTER NOT EXISTS {
+    ?airport geo:lat ?lat ;
+             geo:long ?long .
+  }
+}
+LIMIT 20

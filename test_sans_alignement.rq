@@ -1,0 +1,10 @@
+PREFIX ex:  <http://example.org/schema/>
+PREFIX res: <http://example.org/resource/>
+
+SELECT ?airport ?city
+WHERE {
+  ?airport a ex:Airport ;
+           ex:locatedIn ?city .
+  ?city ex:locatedIn res:Japan .
+}
+LIMIT 10

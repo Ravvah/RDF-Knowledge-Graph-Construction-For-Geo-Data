@@ -1,0 +1,15 @@
+PREFIX ex:  <http://example.org/schema/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT ?airport ?name ?type ?lat ?long ?city
+WHERE {
+  ?airport a ex:Airport ;
+           ex:airportName ?name ;
+           ex:airportType ?type ;
+           ex:locatedIn ?city .
+
+  OPTIONAL { ?airport geo:lat ?lat }
+  OPTIONAL { ?airport geo:long ?long }
+}
+ORDER BY ?airport
+LIMIT 20

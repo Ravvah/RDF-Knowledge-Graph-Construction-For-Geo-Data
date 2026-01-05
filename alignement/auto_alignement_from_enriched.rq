@@ -1,0 +1,20 @@
+PREFIX res: <http://example.org/resource/>
+PREFIX ex:  <http://example.org/schema/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?localCountry owl:sameAs ?dbCountry .
+}
+WHERE {
+  # pays DBpedia enrichis
+  ?dbCountry ex:researchRating ?rating .
+
+  # pays locaux utilisés dans les villes
+  ?city ex:locatedIn ?localCountry .
+
+  FILTER(
+    STRAFTER(STR(?localCountry), "http://example.org/resource/")
+    =
+    STRAFTER(STR(?dbCountry), "http://dbpedia.org/resource/")
+  )
+}

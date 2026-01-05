@@ -1,0 +1,10 @@
+.history
+zip_datasets
+!rdfs/ontology.ttl
+*.ttl
+tdb2-rdfs-database
+tdb2-database
+*.csv
+
+
+

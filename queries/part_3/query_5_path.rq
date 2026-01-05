@@ -1,0 +1,11 @@
+PREFIX ex: <http://example.org/schema/>
+
+SELECT ?airport1 ?airport2 ?city
+WHERE {
+  ?airport1 a ex:Airport ;
+            ex:locatedIn ?city ;
+            ex:locatedIn / ^ex:locatedIn ?airport2 .
+
+  FILTER (?airport1 != ?airport2)
+}
+LIMIT 20
