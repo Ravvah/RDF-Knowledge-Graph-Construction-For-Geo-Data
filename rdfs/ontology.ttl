@@ -1,0 +1,39 @@
+@prefix ont:    <http://example.org/ontology/> .
+@prefix schema: <http://example.org/schema/> .
+@prefix geo:    <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+########################
+# Classes
+########################
+
+ont:Location a rdfs:Class ;
+    rdfs:label "Location" .
+
+ont:City a rdfs:Class ;
+    rdfs:subClassOf ont:Location ;
+    rdfs:label "City" .
+
+ont:Airport a rdfs:Class ;
+    rdfs:subClassOf ont:Location ;
+    rdfs:label "Airport" .
+
+ont:Country a rdfs:Class ;
+    rdfs:label "Country" .
+
+########################
+# Properties
+########################
+
+ont:spatiallyLocatedIn a rdf:Property ;
+    rdfs:domain ont:Location ;
+    rdfs:range  ont:Location ;
+    rdfs:label  "spatially located in (generic)" .
+
+schema:locatedIn a rdf:Property ;
+    rdfs:subPropertyOf ont:spatiallyLocatedIn ;
+    rdfs:label "located in" .
+
+geo:lat rdfs:domain ont:Location .
+geo:long rdfs:domain ont:Location .
