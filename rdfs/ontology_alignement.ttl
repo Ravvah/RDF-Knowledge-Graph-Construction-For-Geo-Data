@@ -1,0 +1,9 @@
+@prefix schema: <http://example.org/schema/> .
+@prefix ont:    <http://example.org/ontology/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+
+schema:City    owl:equivalentClass    ont:City .
+schema:Airport owl:equivalentClass    ont:Airport .
+schema:Country owl:equivalentClass    ont:Country .
+
+schema:locatedIn owl:equivalentProperty ont:locatedIn .
