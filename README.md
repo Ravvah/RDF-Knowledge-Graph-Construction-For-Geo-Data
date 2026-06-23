@@ -25,7 +25,7 @@ The repository contains grouped resources for different geographic domains, incl
 - `alignement/`
 - `queries/`
 
-It also includes a report that documents the work and methodology behind the project.
+It also includes a report in french `Report.pdf` that documents the work and methodology behind the project.
 
 ## Example Query
 
